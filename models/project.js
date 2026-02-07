@@ -4,27 +4,28 @@ const projectSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
+      trim: true,
     },
     description: {
-      type: String
+      type: String,
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true
+      required: true,
     },
     members: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
-      }
+        ref: "User",
+      },
     ],
     status: {
       type: String,
-      enum: ["ACTIVE", "ARCHIVED"],
-      default: "ACTIVE"
-    }
+      enum: ["ACTIVE", "ON_HOLD", "COMPLETED", "ARCHIVED"],
+      default: "ACTIVE",
+    },
   },
   { timestamps: true }
 );
