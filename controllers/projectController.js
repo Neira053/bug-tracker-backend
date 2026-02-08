@@ -25,7 +25,7 @@ exports.createProject = async (req, res) => {
       description,
       createdBy: req.user._id,
       members: [req.user._id],
-      status: "ACTIVE", // default
+      status: "ACTIVE",
     });
 
     res.status(201).json(project);
@@ -60,12 +60,12 @@ exports.addMember = async (req, res) => {
   }
 };
 
-// GET PROJECTS (Logged-in users) + DERIVED BUG STATE
+// GET PROJECTS (ALL USERS) + DERIVED BUG STATE ✅
+
 exports.getProjects = async (req, res) => {
   try {
-    const projects = await Project.find({
-      members: req.user._id,
-    })
+    // 🔥 CHANGE IS HERE: removed members filter
+    const projects = await Project.find()
       .populate("createdBy", "name email")
       .populate("members", "name email");
 
@@ -76,14 +76,19 @@ exports.getProjects = async (req, res) => {
           isDeleted: false,
         });
 
+        console.log("REQ USER:", {
+  id: req.user._id.toString(),
+  role: req.user.role,
+  email: req.user.email
+});
+
+
         let bugState = "EMPTY";
 
         if (bugs.length > 0) {
           if (bugs.some((b) => b.status === "OPEN")) {
             bugState = "OPEN";
-          } else if (
-            bugs.some((b) => b.status === "IN_PROGRESS")
-          ) {
+          } else if (bugs.some((b) => b.status === "IN_PROGRESS")) {
             bugState = "IN_PROGRESS";
           } else {
             bugState = "COMPLETED";
@@ -92,7 +97,7 @@ exports.getProjects = async (req, res) => {
 
         return {
           ...project.toObject(),
-          bugState, // 🔥 derived, not stored
+          bugState,
         };
       })
     );
