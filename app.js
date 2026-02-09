@@ -9,7 +9,7 @@ const errorHandler = require("./middlewares/errorMiddleware");
 const app = express();
 
 /* =======================
-   ✅ CORS (FIXED)
+   ✅ CORS (FIXED + SAFE)
    ======================= */
 
 const allowedOrigins = [
@@ -20,23 +20,20 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests from Postman / curl
+      // allow Postman / server-to-server
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
+        callback(null, true);
       } else {
-        return callback(new Error("Not allowed by CORS"));
+        callback(new Error("Not allowed by CORS"));
       }
     },
+    credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
   })
 );
-
-// Handle preflight requests
-app.options("*", cors());
 
 /* =======================
    BODY PARSERS
