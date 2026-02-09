@@ -36,6 +36,30 @@ exports.createBug = async (req, res, next) => {
   }
 };
 
+// 🔥 GET SINGLE BUG BY ID - THIS WAS MISSING!
+exports.getBugById = async (req, res, next) => {
+  try {
+    const bug = await Bug.findById(req.params.id)
+      .populate("reporter", "name email role")
+      .populate("assignee", "name email role")
+      .populate("projectId", "name description status");
+
+    if (!bug) {
+      return res.status(404).json({ message: "Bug not found" });
+    }
+
+    // Check if bug is deleted
+    if (bug.isDeleted) {
+      return res.status(404).json({ message: "Bug not found" });
+    }
+
+    res.json(bug);
+  } catch (error) {
+    console.error("Get bug by ID error:", error);
+    next(error);
+  }
+};
+
 // ASSIGN BUG (ADMIN only)
 exports.assignBug = async (req, res, next) => {
   try {
