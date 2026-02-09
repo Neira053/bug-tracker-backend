@@ -5,7 +5,6 @@ const {
   updateStatus,
   getBugs,
   getBugById,  // 🔥 ADD THIS to controller
-  updateBug,   // 🔥 ADD THIS to controller (optional, for full CRUD)
   deleteBug
 } = require("../controllers/bugController.js");
 
@@ -22,9 +21,6 @@ router.get("/:id", protect, getBugById);
 
 // Create bug
 router.post("/", protect, createBug);
-
-// Update bug (optional - for full CRUD)
-router.put("/:id", protect, updateBug);
 
 // Assign bug
 router.patch("/:id/assign", protect, assignBug);
