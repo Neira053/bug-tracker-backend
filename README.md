@@ -1,141 +1,167 @@
 # 🐞 Bug Tracker Backend
 
-A production-ready backend for a Bug Tracking System built using Node.js, Express, MongoDB, and JWT authentication, supporting role-based access control, bug lifecycle management, soft deletes, and pagination.
+A role-based bug tracking system backend designed to mirror real-world software engineering workflows.
+Built with scalability, security, and clean API design in mind.
 
-This backend is designed to simulate real-world SaaS systems like Jira / Linear, focusing on clean architecture, scalability, and secure APIs.
+## 🚀 Tech Stack
 
-## 🚀 Live API
+Node.js – Runtime
 
-Base URL:
-```Bash
-https://bug-tracker-backend-jz56.onrender.com
+Express.js – REST API framework
 
-### 🛠 Tech Stack
+MongoDB – Database
 
-Node.js
+Mongoose – ODM
 
-Express.js
+JWT – Authentication & Authorization
 
-MongoDB + Mongoose
-
-JWT Authentication
-
-Role-Based Access Control (RBAC)
-
-RESTful APIs
-
-Render (Deployment)
-
-### ✨ Features
-🔐 Authentication & Authorization
-
-User registration & login
+# 🎯 Core Features
+## 🔐 Authentication & Authorization
 
 JWT-based authentication
 
-Secure password hashing
+Secure protected routes
 
-Role-based access:
+Role-based access control (RBAC)
 
-ADMIN
+## 👥 Role-Based System
 
-DEV
+The system supports three roles, each with clear responsibilities:
 
-TESTER
+### 🔴 Admin
 
-### 🐛 Bug Management
+Create & manage projects
 
-Create bugs (TESTER only)
+Update project lifecycle status
+(ACTIVE, ON_HOLD, COMPLETED, ARCHIVED)
 
-View all bugs with filters
+Assign bugs to developers
 
-View single bug details
+View all bugs and projects
 
-Update bug status (DEV / TESTER)
+Delete bugs (soft delete)
 
-Soft delete bugs (ADMIN only)
+### 🔵 Developer
 
-## 🔄 Bug Lifecycle
+View all projects and bugs
 
-Each bug follows a controlled workflow:
+Assign bugs to self
+
+Update bug status (IN_PROGRESS, CLOSED)
+
+### 🟡 Tester
+
+View all projects and bugs
+
+Create new bugs
+
+Verify fixes and close bugs (CLOSED)
+
+## 🧩 Bug Management
+
+Create, view, update, and delete bugs
+
+PATCH-based status updates (partial updates)
+
+Strict role-based status transitions
+
+Bug history tracking for auditability
+
+Soft delete using isDeleted flag
+
+## 📊 Project Health Tracking
+
+Each project dynamically exposes a bugState:
+
+EMPTY – No bugs
+
+OPEN – Open bugs exist
+
+IN_PROGRESS – Bugs are being worked on
+
+COMPLETED – All bugs resolved
+
+This state is derived dynamically (not stored), ensuring data consistency.
+
+## 📦 API Design Highlights
+
+RESTful routes
+
+Clear separation of concerns (routes, controllers, models)
+
+Centralized error handling
+
+Pagination support for bug listings
+
+Clean and predictable responses
+
+## 🧪 Example API Endpoints
+Authentication
 ```bash
-OPEN → IN_PROGRESS → RESOLVED → CLOSED
+POST /api/auth/register
+POST /api/auth/login
 
-### 📄 Pagination & Filtering
+Projects
+POST   /api/project            (Admin)
+GET    /api/project            (All users)
+PATCH  /api/project/:id/status (Admin)
 
-Pagination using page and limit
+Bugs
+POST   /api/bugs                     (Tester)
+GET    /api/bugs                     (All users)
+GET    /api/bugs/:id                 (All users)
+PATCH  /api/bugs/:id/status          (Role-based)
+DELETE /api/bugs/:id                 (Admin – soft delete)
 
-Filter bugs by:
+## 🛡️ Security & Best Practices
 
-status
+No sensitive data exposed
 
-priority
+Passwords hashed
 
-project
+Tokens verified on every protected request
 
-### 🗑 Soft Delete
+Role checks enforced at controller level
 
-Bugs are not permanently removed
+No hard deletes for critical data
 
-isDeleted = true marks deleted bugs
+## 🧠 Design Philosophy
 
-Deleted bugs are excluded from fetch queries
+This project focuses on:
 
-### 📊 Audit History
+Realistic engineering workflows
 
-Every bug stores:
+Clear role separation
 
-status change history
+Maintainable backend architecture
 
-who changed it
+Production-style API behavior
 
-timestamp
+It goes beyond basic CRUD to emphasize system design and backend reasoning.
 
-This ensures traceability and accountability.
+## ▶️ Running Locally
+git clone <repo-url>
+cd backend
+npm install
+npm start
 
-## 📁 Project Structure
+
+Create a .env file:
 ```bash
+PORT=5000
+MONGODB_URI=your_mongo_uri
+JWT_SECRET=your_secret
 
-backend/
-├── controllers/
-│   ├── authController.js
-│   ├── bugController.js
-│   └── projectController.js
-├── routes/
-│   ├── authRoutes.js
-│   ├── bugRoutes.js
-│   └── projectRoutes.js
-├── models/
-│   ├── User.js
-│   ├── Bug.js
-│   └── Project.js
-├── middlewares/
-│   ├── authMiddleware.js
-│   └── errorMiddleware.js
-├── config/
-│   └── db.js
-├── app.js
-├── server.js
-└── README.md
+## 🌐 Deployment
 
-## 📦 API Endpoints
-###🔑 Auth Routes
-```bash
-| Method | Endpoint             | Description       |
-| ------ | -------------------- | ----------------- |
-| POST   | `/api/auth/register` | Register new user |
-| POST   | `/api/auth/login`    | Login user        |
+The backend is deployed and tested on a cloud platform, with proper CORS configuration for frontend integration.
 
-### 🐞 Bug Routes
-```bash
-| Method | Endpoint               | Access        |
-| ------ | ---------------------- | ------------- |
-| POST   | `/api/bugs`            | TESTER        |
-| GET    | `/api/bugs`            | Authenticated |
-| GET    | `/api/bugs/:id`        | Authenticated |
-| PATCH  | `/api/bugs/:id/status` | DEV / TESTER  |
-| DELETE | `/api/bugs/:id`        | ADMIN         |
+## 📌 Status
 
-### 📁 Project Routes
-```bash
+✔ Backend complete
+✔ APIs tested via Postman
+✔ Frontend integration in progress
 
+🙌 Author
+
+Built with focus on learning by building, clean backend practices, and real-world applicability.
