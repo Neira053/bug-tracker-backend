@@ -100,18 +100,25 @@ Authentication
 ```bash
 POST /api/auth/register
 POST /api/auth/login
+```
+-------------------
 
+``` bash
 Projects
 POST   /api/project            (Admin)
 GET    /api/project            (All users)
 PATCH  /api/project/:id/status (Admin)
-
+````
+-------------------
+```bash
 Bugs
 POST   /api/bugs                     (Tester)
 GET    /api/bugs                     (All users)
 GET    /api/bugs/:id                 (All users)
 PATCH  /api/bugs/:id/status          (Role-based)
 DELETE /api/bugs/:id                 (Admin – soft delete)
+```
+----------------------
 
 ## 🛡️ Security & Best Practices
 
@@ -140,10 +147,13 @@ Production-style API behavior
 It goes beyond basic CRUD to emphasize system design and backend reasoning.
 
 ## ▶️ Running Locally
+```bash
 git clone <repo-url>
 cd backend
 npm install
 npm start
+```
+-----------------
 
 
 Create a .env file:
@@ -151,6 +161,8 @@ Create a .env file:
 PORT=5000
 MONGODB_URI=your_mongo_uri
 JWT_SECRET=your_secret
+```
+----------------------
 
 ## 🌐 Deployment
 
