@@ -5,24 +5,24 @@ Built with scalability, security, and clean API design in mind.
 
 ## 🚀 Tech Stack
 
-Node.js – Runtime
+• Node.js – Runtime
 
-Express.js – REST API framework
+• Express.js – REST API framework
 
-MongoDB – Database
+• MongoDB – Database
 
-Mongoose – ODM
+• Mongoose – ODM
 
-JWT – Authentication & Authorization
+• JWT – Authentication & Authorization
 
 # 🎯 Core Features
 ## 🔐 Authentication & Authorization
 
-JWT-based authentication
+• JWT-based authentication
 
-Secure protected routes
+• Secure protected routes
 
-Role-based access control (RBAC)
+• Role-based access control (RBAC)
 
 ## 👥 Role-Based System
 
@@ -30,70 +30,70 @@ The system supports three roles, each with clear responsibilities:
 
 ### 🔴 Admin
 
-Create & manage projects
+• Create & manage projects
 
-Update project lifecycle status
+• Update project lifecycle status
 (ACTIVE, ON_HOLD, COMPLETED, ARCHIVED)
 
-Assign bugs to developers
+• Assign bugs to developers
 
-View all bugs and projects
+• View all bugs and projects
 
-Delete bugs (soft delete)
+• Delete bugs (soft delete)
 
 ### 🔵 Developer
 
-View all projects and bugs
+• View all projects and bugs
 
-Assign bugs to self
+• Assign bugs to self
 
-Update bug status (IN_PROGRESS, CLOSED)
+• Update bug status (IN_PROGRESS, CLOSED)
 
 ### 🟡 Tester
 
-View all projects and bugs
+• View all projects and bugs
 
-Create new bugs
+• Create new bugs
 
-Verify fixes and close bugs (CLOSED)
+• Verify fixes and close bugs (CLOSED)
 
 ## 🧩 Bug Management
 
-Create, view, update, and delete bugs
+• Create, view, update, and delete bugs
 
-PATCH-based status updates (partial updates)
+• PATCH-based status updates (partial updates)
 
-Strict role-based status transitions
+• Strict role-based status transitions
 
-Bug history tracking for auditability
+• Bug history tracking for auditability
 
-Soft delete using isDeleted flag
+• Soft delete using isDeleted flag
 
 ## 📊 Project Health Tracking
 
 Each project dynamically exposes a bugState:
 
-EMPTY – No bugs
+• EMPTY – No bugs
 
-OPEN – Open bugs exist
+• OPEN – Open bugs exist
 
-IN_PROGRESS – Bugs are being worked on
+• IN_PROGRESS – Bugs are being worked on
 
-COMPLETED – All bugs resolved
+• COMPLETED – All bugs resolved
 
 This state is derived dynamically (not stored), ensuring data consistency.
 
 ## 📦 API Design Highlights
 
-RESTful routes
+• RESTful routes
 
-Clear separation of concerns (routes, controllers, models)
+• Clear separation of concerns (routes, controllers, models)
 
-Centralized error handling
+• Centralized error handling
 
-Pagination support for bug listings
+• Pagination support for bug listings
 
-Clean and predictable responses
+• Clean and predictable responses
 
 ## 🧪 Example API Endpoints
 Authentication
@@ -122,29 +122,29 @@ DELETE /api/bugs/:id                 (Admin – soft delete)
 
 ## 🛡️ Security & Best Practices
 
-No sensitive data exposed
+• No sensitive data exposed
 
-Passwords hashed
+• Passwords hashed
 
-Tokens verified on every protected request
+• Tokens verified on every protected request
 
-Role checks enforced at controller level
+• Role checks enforced at controller level
 
-No hard deletes for critical data
+• No hard deletes for critical data
 
 ## 🧠 Design Philosophy
 
 This project focuses on:
 
-Realistic engineering workflows
+• Realistic engineering workflows
 
-Clear role separation
+• Clear role separation
 
-Maintainable backend architecture
+• Maintainable backend architecture
 
-Production-style API behavior
+• Production-style API behavior
 
-It goes beyond basic CRUD to emphasize system design and backend reasoning.
+• It goes beyond basic CRUD to emphasize system design and backend reasoning.
 
 ## ▶️ Running Locally
 ```bash
@@ -174,6 +174,6 @@ The backend is deployed and tested on a cloud platform, with proper CORS configu
 ✔ APIs tested via Postman
 ✔ Frontend integration in progress
 
-🙌 Author
+## 🙌 Author
 
 Built with focus on learning by building, clean backend practices, and real-world applicability.
