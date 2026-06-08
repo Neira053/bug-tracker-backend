@@ -9,31 +9,13 @@ const errorHandler = require("./middlewares/errorMiddleware");
 const app = express();
 
 /* =======================
-   ✅ CORS (FIXED + SAFE)
+   CORS
    ======================= */
-
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://bug-tracker-frontend-one-alpha.vercel.app",
-  "https://bug-tracker-frontend-git-main-nehapaswan2806-9024s-projects.vercel.app/",
-  "https://bug-tracker-frontend-6011woh5v-nehapaswan2806-9024s-projects.vercel.app/"
-];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      // allow Postman / server-to-server
-      if (!origin) return callback(null, true);
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: true,
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -61,7 +43,7 @@ app.get("/", (req, res) => {
 });
 
 /* =======================
-   ERROR HANDLER (LAST)
+   ERROR HANDLER
    ======================= */
 
 app.use(errorHandler);
