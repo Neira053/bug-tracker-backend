@@ -15,6 +15,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:3000",
   "https://bug-tracker-frontend-one-alpha.vercel.app",
+  "https://bug-tracker-frontend-git-main-nehapaswan2806-9024s-projects.vercel.app/",
+  "https://bug-tracker-frontend-6011woh5v-nehapaswan2806-9024s-projects.vercel.app/"
 ];
 
 app.use(
